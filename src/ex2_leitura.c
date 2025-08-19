@@ -22,6 +22,8 @@ int main() {
     int fd;
     
     printf("=== Exercício 2: Leitura de Arquivo ===\n\n");
+
+    //open(dados/teste1.txt);
     
     /*
      * TODO 1: Abrir o arquivo 'dados/teste1.txt' para leitura
@@ -33,7 +35,7 @@ int main() {
      * TODO 2: Verificar se a abertura foi bem-sucedida
      * Se fd < 0, houve erro
      */
-    if (/* COMPLETE AQUI */) {
+    if (/*complete aqui*/) {
         perror("Erro ao abrir arquivo");
         return 1;
     }
