@@ -35,25 +35,26 @@ int main() {
         perror("Erro ao abrir dados/teste2.txt");
         return 1;
     }
-    
     /*
      * TODO 1: Implementar loop de leitura
      * Loop até read() retornar 0 (fim do arquivo)
      */
-    while (/* TODO: condição do loop */) {
+    while ((bytes_lidos = read(fd, buffer, BUFFER_SIZE)) > 0) {
         total_reads++;
         
         /*
          * TODO 2: Contar caracteres '\n' no buffer
          */
         for (int i = 0; i < bytes_lidos; i++) {
-            /* TODO: verificar '\n' e incrementar total_linhas */
+            if (buffer[i] == '\n') {
+                total_linhas++;
+            }
         }
         
         /*
          * TODO 3: Somar total de caracteres
          */
-        /* TODO: total_caracteres += ... */;
+        total_caracteres += bytes_lidos;
         
         if (total_reads % 10 == 0) {
             printf("Processadas %d chamadas read()...\n", total_reads);
@@ -63,32 +64,11 @@ int main() {
     /*
      * TODO 4: Verificar se houve erro na leitura
      */
-    if (/* TODO: condição de erro */) {
+    if (bytes_lidos < 0) {
         perror("Erro na leitura");
         close(fd);
         return 1;
     }
-    
-    close(fd);
-    
-    clock_t fim = clock();
-    double tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-    
-    printf("\n=== Resultados ===\n");
-    printf("Linhas: %d\n", total_linhas);
-    printf("Caracteres: %d\n", total_caracteres);
-    printf("Chamadas read(): %d\n", total_reads);
-    printf("Tempo: %.6f segundos\n", tempo);
-    
-    if (total_reads > 0) {
-        printf("Média bytes/read: %.1f\n", 
-               (double)total_caracteres / total_reads);
-    }
-    
-    printf("\nExecute: strace -c ./ex3_contador\n");
-    
-    return 0;
-}
 
 /*
  * Experimente mudar BUFFER_SIZE para 16, 256, 1024
