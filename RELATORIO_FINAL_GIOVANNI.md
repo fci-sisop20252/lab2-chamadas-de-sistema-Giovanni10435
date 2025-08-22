@@ -13,14 +13,13 @@ strace -e write ./ex1b_write
 ### Análise
 
 **1. Quantas syscalls write() cada programa gerou?**
-- ex1a_printf: _1_ syscalls
+- ex1a_printf: _8_ syscalls
 - ex1b_write: _7_ syscalls
 
 **2. Por que há diferença entre os dois métodos? Consulte o docs/printf_vs_write.md**
 
 ```
 Há diferenças pois no printf há apenas uma chamada do sistema, que seria para printar na tela. Enquanto isso, no Write há 7 chamadas, todas para editar o arquivo.
-(falta responder)
 ```
 
 **3. Qual método é mais previsível? Por quê?**
@@ -35,8 +34,8 @@ O método mais previsível é o Write() pois ele sempre resulta em **uma** chama
 ## Exercício 2 - Leitura de Arquivo
 
 ### Resultados da execução:
-- File descriptor: _____
-- Bytes lidos: _____
+- File descriptor: _3_
+- Bytes lidos: _127_
 
 ### Comando strace:
 ```bash
@@ -74,26 +73,26 @@ Pois as chamadas como open() read() e close() podem falhar em situações como, 
 ## Exercício 3 - Contador com Loop
 
 ### Resultados (BUFFER_SIZE = 64):
-- Linhas: _____ (esperado: 25)
-- Caracteres: _____
-- Chamadas read(): _____
-- Tempo: _____ segundos
+- Linhas: _25_ (esperado: 25)
+- Caracteres: _1300_
+- Chamadas read(): _21_
+- Tempo: _0.001973_ segundos
 
 ### Experimentos com buffer:
 
 | Buffer Size | Chamadas read() | Tempo (s) |
 |-------------|-----------------|-----------|
-| 16          |                 |           |
-| 64          |                 |           |
-| 256         |                 |           |
-| 1024        |                 |           |
+| 16          |              82 | 0.000503  |
+| 64          |              21 | 0.001973  |
+| 256         |               6 | 0.002108  |
+| 1024        |               2 | 0.000310  |
 
 ### Análise
 
 **1. Como o tamanho do buffer afeta o número de syscalls?**
 
 ```
-[Sua análise aqui]
+Buffers maiores podem compilar tamanhos maiores de instruções, levando a menos chams de syscalls.
 ```
 
 **2. Como você detecta o fim do arquivo?**
@@ -119,16 +118,16 @@ Cada syscall é uma troca de contexto, trocando das permissões do usuário para
 ## Exercício 4 - Cópia de Arquivo
 
 ### Resultados:
-- Bytes copiados: _____
-- Operações: _____
-- Tempo: _____ segundos
-- Throughput: _____ KB/s
+- Bytes copiados: _1364_
+- Operações: _6_
+- Tempo: _0.001642_ segundos
+- Throughput: _765.10_ KB/s
 
 ### Verificação:
 ```bash
 diff dados/origem.txt dados/destino.txt
 ```
-Resultado: [ ] Idênticos [ ] Diferentes
+Resultado: [X] Idênticos [ ] Diferentes
 
 ### Análise
 
