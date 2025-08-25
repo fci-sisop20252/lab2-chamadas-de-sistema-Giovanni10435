@@ -193,7 +193,7 @@ time ./ex4_copia
 time cp dados/origem.txt dados/destino_cp.txt
 ```
 
-**Qual foi mais rápido?** _cp_
+**Qual foi mais rápido?** _./ex4_copia_
 
 **Por que você acha que foi mais rápido?**
 
@@ -207,7 +207,7 @@ Acretido que (conforme discutido no exercício 3 de análises gerais) ele tenha 
 
 Certifique-se de ter:
 - [V] Todos os códigos com TODOs completados
-- [ ] Traces salvos em `traces/`
+- [V] Traces salvos em `traces/`
 - [V] Este relatório preenchido como `RELATORIO.md`
 
 ```bash
